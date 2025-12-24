@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import "/app/globals.css";
+import "./globals.css";
 import DashboardLayout from "./(inApp)/layout";
 import Dashboard from "./(inApp)/dashboard/page";
 import Link from "next/link";
