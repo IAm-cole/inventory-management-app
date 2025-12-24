@@ -1,3 +1,4 @@
+"use client";
 import { useFilter } from "@/app/context/context";
 
 const DisplayCart = () => {
