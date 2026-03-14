@@ -1,13 +1,28 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./database.js";
- 
+// import router from "routes/user.route.js"
+import userRouter from './routes/user.route.js'
+ dotenv.config({
+  path: "../../.env",
+});
 
 const app = express();
 
-dotenv.config({
-  path: "../../.env",
-});
+// ability for server to pass whatever client req
+
+app.use(express.json())
+
+
+
+
+
+//route declearation
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/users", postRouter);
+
+
+// route: http://localhost:4000/api/v1/users/register
 
 export const startServer = async () => {
   try {
