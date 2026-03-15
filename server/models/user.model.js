@@ -4,7 +4,7 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: true,
+       required: true,
       unique: true,
       lowercase: true,
       trim: true,
@@ -13,15 +13,15 @@ const userSchema = new Schema(
     },
 
     password: {
-      tyrpe: String,
-      required: true,
+      type: String,
+       required: true,
       minLength: 6,
       maxLength: 50,
     },
 
     email: {
       type: String,
-      required: true,
+       required: true,
       unique: true,
       lowercase: true,
       trim: true,

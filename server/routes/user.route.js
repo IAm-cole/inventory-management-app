@@ -9,7 +9,7 @@ import { registerUser } from '../controllers/user.controller.js';
 
 
 
-router.post('/register').post(registerUser);
+router.route('/register').post(registerUser);
 
 
 
