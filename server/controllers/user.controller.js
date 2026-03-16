@@ -19,8 +19,8 @@ const registerUser = async (req, res) => {
     //create user after validation pass
 
     const user = await User.create({
-      username,
-      email: toLowercase,
+      username: username.toLowerCase(),
+      email: email.toLowerCase(),
       password,
       loggedIn: false,
     });
