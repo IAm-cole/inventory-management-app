@@ -9,6 +9,7 @@ router.route("/logout").post(logoutUser);
 
 
 
+
 export default router
 ;//middleware
 // router.use(

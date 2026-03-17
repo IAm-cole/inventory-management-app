@@ -5,7 +5,7 @@ import mongoose, { Schema } from "mongoose";
 const postSchema = new Schema (
     {
         name: {
-            type: string,
+            type: String,
             required: true,
             trim: true,
             minlength: 1,
@@ -13,7 +13,7 @@ const postSchema = new Schema (
         }, 
 
         description: {
-            type: string,
+            type: String,
             required: true,
             trim: true,
         },
