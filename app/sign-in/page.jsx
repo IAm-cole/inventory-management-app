@@ -74,12 +74,20 @@ export default function LoginPage() {
             {loading ? "Logging in..." : "Login"}
           </button>
           {err && <p className="text-sm text-red-600">{err}</p>}
-          <Link
-            href="/"
-            className="mt-4 block text-center text-gray-500 hover:underline font-bold "
-          >
-            Back to Home
-          </Link>
+          <div className="flex justify-between">
+            <Link
+              href="/"
+              className="mt-2 block text-center text-gray-500 hover:underline font-bold "
+            >
+              Back to Home
+            </Link>
+            <Link
+              href="/signup-login"
+              className="mt-2 block text-center text-gray-500 hover:underline font-bold "
+            >
+              Don't have an account? Sign up
+            </Link>
+          </div>
         </form>
       </div>
     </main>

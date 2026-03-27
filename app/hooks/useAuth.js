@@ -78,42 +78,46 @@ export default function useAuth() {
 
   // Login user
   const login = async (email, password) => {
-    const res = await fetch("/api/auth/login", {
+    const res = await fetch("http://localhost:4000/api/v1/users/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
 
+    const data = await res.json();
+
     if (!res.ok) {
-      throw new Error("Invalid login");
+      throw new Error(data.message || "Login failed");
     }
 
-    const data = await res.json();
     localStorage.setItem("accessToken", data.accessToken);
 
     setAccessToken(data.accessToken);
     await fetchUser(data.accessToken);
-    return true;
+
+    return data;
   };
 
   // Signup user
-  const signup = async (username,email, password) => {
-    const res = await fetch("/api/auth/signup", {
+  const signup = async (username, email, password) => {
+    const res = await fetch("http://localhost:8000/api/v1/users/register", {
       method: "POST",
-      body: JSON.stringify({username, email, password }),
+      body: JSON.stringify({ username, email, password }),
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
 
-    if (!res.ok) throw new Error("Signup failed");
+    const data = await res.json();
 
-    return login(username, email, password); // auto-login
+    if (!res.ok) throw new Error(data.message || "Signup failed");
+
+    return data; // auto-login
   };
 
   // Logout
   const logout = async () => {
-    await fetch("/api/auth/logout", {
+    await fetch("http://localhost:4000/api/v1/users/logout", {
       method: "POST",
       credentials: "include",
     });

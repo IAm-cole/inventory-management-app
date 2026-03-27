@@ -3,6 +3,8 @@ import { User } from "../models/user.model.js";
 const registerUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
+     console.log("Backend received request!");
+     console.log("Request body:", req.body);
 
     if (!username || !email || !password) {
       return res.status(400).json({

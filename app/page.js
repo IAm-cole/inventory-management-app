@@ -28,7 +28,7 @@ const Home = () => {
           </p>
           <div className="flex gap-4 justify-center">
             <Link
-              href="/signup-login"
+              href="/sign-in"
               className="bg-cyan-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-cyan-600 transition-colors"
             >
               Get started
