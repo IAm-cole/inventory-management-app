@@ -48,6 +48,8 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
+     console.log("Backend received request!");
+     console.log("Request body:", req.body);
 
     const user = await User.findOne({ email: email.toLowerCase() });
 

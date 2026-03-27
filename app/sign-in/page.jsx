@@ -12,21 +12,24 @@ export default function LoginPage() {
 
   const { login } = useAuth();
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [err, setErr] = useState(null);
+  const [data, setData] = useState({ email: "", password: "" });
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   async function handle(e) {
     e.preventDefault();
-    setErr(null);
+    setError(null);
     setLoading(true);
+    console.log("Login attempt with:", data); // Debug log
 
     try {
       await login(email, password);
-      router.push("/profile");
-    } catch (e) {
-      setErr(e.message);
+      router.push("/inventory/inventory-management");
+    } catch (error) {
+      setError(
+        error.message ||
+          "Login failed. Please check your credentials and try again.",
+      );
     } finally {
       setLoading(false);
     }
@@ -57,29 +60,31 @@ export default function LoginPage() {
           <input
             className="w-full border rounded px-3 py-2"
             placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={data.email}
+            onChange={(e) => setData({ ...data, email: e.target.value })}
           />
           <input
             className="w-full border rounded px-3 py-2"
             placeholder="Password"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={data.password}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
           />
           <button
-            className="w-full bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded"
+            type="submit"
+            className="bg-cyan-500 text-white py-3 rounded-lg font-semibold cursor-pointer hover:bg-cyan-600 transition-colors w-full"
             disabled={loading}
+            onClick={() => console.log("btn clicked")}
           >
             {loading ? "Logging in..." : "Login"}
           </button>
-          {err && <p className="text-sm text-red-600">{err}</p>}
+          {error && <p className="text-sm text-red-600">{error.message}</p>}
           <div className="flex justify-between">
             <Link
-              href="/"
+              href="/verify-email"
               className="mt-2 block text-center text-gray-500 hover:underline font-bold "
             >
-              Back to Home
+              forgot password?
             </Link>
             <Link
               href="/signup-login"

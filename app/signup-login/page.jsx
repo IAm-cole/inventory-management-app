@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import useAuth from "../hooks/useAuth";
+import Link from "next/link";
 
 export default function SignUpLogin() {
   const { signup } = useAuth(); //
@@ -19,7 +20,7 @@ export default function SignUpLogin() {
 
     try {
       await signup(data.username, data.email, data.password);
-      router.push("/login");
+      router.push("/sign-in");
     } catch (error) {
       setErr(error.message || "Signup failed");
     } finally {
@@ -84,6 +85,12 @@ export default function SignUpLogin() {
               {loading ? "Creating account..." : "Sign Up"}
             </button>
           </div>
+          <Link
+            href="/sign-in"
+            className="mt-2 block text-center text-gray-500 hover:underline font-bold text-lg "
+          >
+            Already have an account? Log in
+          </Link>
         </form>
       </div>
     </section>

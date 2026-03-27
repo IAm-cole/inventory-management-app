@@ -78,7 +78,7 @@ export default function useAuth() {
 
   // Login user
   const login = async (email, password) => {
-    const res = await fetch("http://localhost:4000/api/v1/users/login", {
+    const res = await fetch("http://localhost:8000/api/v1/users/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
