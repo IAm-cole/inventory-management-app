@@ -10,7 +10,7 @@ import { FilterProvider } from "./context/context";
 export const metadata = {
   title: "Inventory Management",
   description: "",
-};
+};  
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;

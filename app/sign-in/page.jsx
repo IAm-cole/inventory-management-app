@@ -16,15 +16,15 @@ export default function LoginPage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  async function handle(e) {
+  async function handleSignIn(e) {
     e.preventDefault();
     setError(null);
     setLoading(true);
     console.log("Login attempt with:", data); // Debug log
 
     try {
-      await login(email, password);
-      router.push("/inventory/inventory-management");
+      await login(data.email, data.password);
+      router.push("/dashboard/inventory-management");
     } catch (error) {
       setError(
         error.message ||
@@ -56,7 +56,7 @@ export default function LoginPage() {
     <main className=" w-screen flex justify-center items-center min-h-screen bg-gradient-to-br from-purple-50 to-cyan-100 p-6   ">
       <div className="max-w-md w-full mx-auto p-7 rounded-lg shadow-lg space-y-6">
         <h1 className="text-2xl font-semibold mb-4">Login</h1>
-        <form onSubmit={handle} className="space-y-4">
+        <form onSubmit={handleSignIn} className="space-y-4">
           <input
             className="w-full border rounded px-3 py-2"
             placeholder="Email"

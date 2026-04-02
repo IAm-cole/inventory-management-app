@@ -3,8 +3,8 @@ import { User } from "../models/user.model.js";
 const registerUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
-     console.log("Backend received request!");
-     console.log("Request body:", req.body);
+    console.log("Backend received register request!");
+    console.log("Request body:", req.body);
 
     if (!username || !email || !password) {
       return res.status(400).json({
@@ -31,11 +31,17 @@ const registerUser = async (req, res) => {
       username: username.toLowerCase(),
       email: email.toLowerCase(),
       password,
+      picture: "",
       loggedIn: false,
     });
     res.status(201).json({
       message: "User registered successfully",
-      user: { id: user._id, email: user.email, username: user.username },
+      user: {
+        id: user._id,
+        email: user.email,
+        username: user.username,
+        picture: user.picture,
+      },
     });
   } catch (error) {
     res.status(500).json({
@@ -48,8 +54,8 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-     console.log("Backend received request!");
-     console.log("Request body:", req.body);
+    console.log("Backend received  login request!");
+    console.log("Request body:", req.body);
 
     const user = await User.findOne({ email: email.toLowerCase() });
 
@@ -76,7 +82,7 @@ const loginUser = async (req, res) => {
   } catch (error) {
     console.log("Login error:", error);
     res.status(500).json({
-      message: "Internal server error",
+      message: "Internal server error check",
       detail: error.message,
     });
   }

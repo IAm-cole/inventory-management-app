@@ -18,43 +18,46 @@ export default function useAuth() {
   }, []);
 
   // Helper to call backend with refresh logic
-  const fetchWithRefresh = useCallback(async (url, opts = {}) => {
-    let token = accessToken;
+  const fetchWithRefresh = useCallback(
+    async (url, opts = {}) => {
+      let token = accessToken;
 
-    let res = await fetch(url, {
-      ...opts,
-      headers: {
-        ...(opts.headers || {}),
-        Authorization: `Bearer ${token}`,
-      },
-      credentials: "include",
-    });
-
-    // If token expired → refresh
-    if (res.status === 401) {
-      const refreshRes = await fetch("/api/auth/refresh", {
-        method: "POST",
+      let res = await fetch(url, {
+        ...opts,
+        headers: {
+          ...(opts.headers || {}),
+          Authorization: `Bearer ${token}`,
+        },
         credentials: "include",
       });
 
-      if (refreshRes.ok) {
-        const data = await refreshRes.json();
-        localStorage.setItem("accessToken", data.accessToken);
-        setAccessToken(data.accessToken);
-
-        // retry original request
-        return fetch(url, {
-          ...opts,
-          headers: {
-            ...(opts.headers || {}),
-            Authorization: `Bearer ${data.accessToken}`,
-          },
+      // If token expired → refresh
+      if (res.status === 401) {
+        const refreshRes = await fetch("/api/auth/refresh", {
+          method: "POST",
+          credentials: "include",
         });
-      }
-    }
 
-    return res;
-  }, [accessToken]);
+        if (refreshRes.ok) {
+          const data = await refreshRes.json();
+          localStorage.setItem("accessToken", data.accessToken);
+          setAccessToken(data.accessToken);
+
+          // retry original request
+          return fetch(url, {
+            ...opts,
+            headers: {
+              ...(opts.headers || {}),
+              Authorization: `Bearer ${data.accessToken}`,
+            },
+          });
+        }
+      }
+
+      return res;
+    },
+    [accessToken],
+  );
 
   // Fetch the logged in user info
   const fetchUser = async (token) => {
@@ -68,7 +71,9 @@ export default function useAuth() {
       } else {
         const data = await res.json();
         setUser(data.user);
+         console.log("User info fetched:", data.user);
       }
+     
     } catch {
       setUser(null);
     } finally {
@@ -117,7 +122,7 @@ export default function useAuth() {
 
   // Logout
   const logout = async () => {
-    await fetch("http://localhost:4000/api/v1/users/logout", {
+    await fetch("http://localhost:8000/api/v1/users/logout", {
       method: "POST",
       credentials: "include",
     });
