@@ -51,7 +51,7 @@ const DashboardLayout = ({ children }) => {
            : "text-gray-900 hover:bg-gray-700/10 "
        }`;
   return ( 
-    <section>
+    <section className="w-screen">
       <div className="flex flex-col justify-center items-center pt-6  w-screen min-h-screen"> 
         <div className=" bg-gradient-to-t from-cyan-900 to-cyan-500 p-3 text-slate-50 rounded-lg flex gap-4">
           {routes.map(({ path, label }) => (

@@ -11,6 +11,11 @@ const registerUser = async (req, res) => {
         message: "All field are important",
       });
     }
+
+    
+
+
+    
     //check existing user
 
     const existingEmail = await User.findOne({ email: email.toLowerCase() });

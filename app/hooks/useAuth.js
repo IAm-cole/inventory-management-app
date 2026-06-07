@@ -11,7 +11,7 @@ export default function useAuth() {
     const token = localStorage.getItem("accessToken");
     if (token) {
       setAccessToken(token);
-      fetchUser(token);
+     
     } else {
       setLoading(false);
     }
@@ -59,27 +59,27 @@ export default function useAuth() {
     [accessToken],
   );
 
-  // Fetch the logged in user info
-  const fetchUser = async (token) => {
-    try {
-      const res = await fetch("/api/auth/user", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+  // // Fetch the logged in user info
+  // const fetchUser = async (token) => {
+  //   try {
+  //     const res = await fetch("/api/auth/user", {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
 
-      if (!res.ok) {
-        setUser(null);
-      } else {
-        const data = await res.json();
-        setUser(data.user);
-         console.log("User info fetched:", data.user);
-      }
+  //     if (!res.ok) {
+  //       setUser(null);
+  //     } else {
+  //       const data = await res.json();
+  //       setUser(data.user);
+  //        console.log("User info fetched:", data.user);
+  //     }
      
-    } catch {
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //   } catch {
+  //     setUser(null);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   // Login user
   const login = async (email, password) => {

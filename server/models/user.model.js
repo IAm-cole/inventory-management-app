@@ -16,7 +16,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
-      minLength: 6,
+      minLength: 5,
       maxLength: 50,
     },
 
@@ -41,6 +41,7 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
-  
 
-export const User = mongoose.model("User", userSchema);
+
+
+

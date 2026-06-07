@@ -7,7 +7,7 @@ const SearchComponent = () => {
   const [search, setSearch] = useState("");
 
   const handleSearch = (value) => {
-    value.preventDefault;
+    value.preventDefault();
     setSearch(value);
 
     const query = value.toLowerCase().trim();

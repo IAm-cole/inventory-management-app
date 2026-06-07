@@ -18,11 +18,11 @@ axios.defaults.withCredentials = true;
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="flex max-w-[1200px] flex-col w-screen bg-gradient-to-br from-purple-50 to-cyan-100 antialiased">
+      <body className="flex flex-col w-screen bg-gradient-to-br from-purple-50 to-cyan-100 antialiased">
         {/* AuthProviders is a client component that wraps Auth0Provider + FilterProvider */}
         <FilterProvider>
           <Header />
-          <main className="grow">{children}</main>
+          <main >{children}</main>
         </FilterProvider>
       </body>
     </html>
